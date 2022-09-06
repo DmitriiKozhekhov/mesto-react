@@ -1,0 +1,17 @@
+.content {
+  width: calc(100% - 2 * 200px);
+  display: grid;
+  margin: 0 auto;
+  flex: 1;
+}
+@media screen and (max-width: 1279px) {
+  .content {
+    width: calc(100% - 2 * 50px);
+  }
+}
+/* 767 */
+@media screen and (max-width: 767px) {
+  .content {
+    width: calc(100% - 2 * 19px);
+  }
+}
