@@ -4,7 +4,7 @@ function Card (props) {
     }
     return (
         <article className="element">
-        <img className="element__image" style={{ backgroundImage: `url(${props.card.link})` }}  onClick={handleClick}  alt={props.card.name}/>
+        <div className="element__image" style={{ backgroundImage: `url(${props.card.link})` }}  onClick={handleClick}  alt={props.card.name}></div>
         <button className="element__remove" aria-label="Удалить изображение" type ="button"></button>
         <div className = "element__btm">
          <h2 className = "element__title">{props.card.name}</h2>
