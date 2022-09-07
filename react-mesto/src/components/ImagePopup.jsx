@@ -1,5 +1,4 @@
 function ImagePopup (props) {
-  console.log(props.card.link)
     return (
         <div className={`popup popup_to_image-strech ${props.isOpen ? "popup_open" : ""}`} >
         <div className="popup__container">
