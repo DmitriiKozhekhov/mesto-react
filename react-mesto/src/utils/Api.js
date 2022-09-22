@@ -74,5 +74,9 @@ export default class Api {
       headers: this._headers,
     }).then((res)=> this._getResOrError(res));
   }
+  changeLikeCardStatus(card, isLiked) {
+    return isLiked ? this.setLike(card) : this.removeLike(card);
+  }
 }
+  
 export const api = new Api('https://mesto.nomoreparties.co/v1/cohort-47', 'ae2441a2-0fee-454f-8a62-d5dbdc72ac5d');
