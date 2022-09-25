@@ -1,9 +1,10 @@
 .element {
-  overflow: hidden;
-  display: grid;
-  grid-template: 281px min-content / 1fr;
-  color: #000;
-  position: relative;
   background-color: #fff;
+  color: #000;
+  display: grid;
+  grid-template: 282px min-content / 1fr;
   border-radius: 10px;
+  overflow: hidden;
+  position: relative;
 }
+

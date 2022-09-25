@@ -1,8 +1,10 @@
 import React from "react";
 import PopupWithForm from "./PopupWithForm";
+
 function AddPlacePopup(props) {
   const refPlaceName = React.useRef();
   const refPlaceLink = React.useRef();
+  
   function handleSubmit(e) {
     e.preventDefault();
     props.onAddPlace({
@@ -10,10 +12,12 @@ function AddPlacePopup(props) {
       link: refPlaceLink.current.value,
     });
   }
+
   React.useEffect(() => {
     refPlaceName.current.value = "";
     refPlaceLink.current.value = "";
   }, [props.isOpen]);
+  
   return (
     <PopupWithForm
       name="create-card"

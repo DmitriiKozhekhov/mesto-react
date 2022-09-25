@@ -10,6 +10,7 @@ import { CurrentUserContext } from "../contexts/CurrentUserContext";
 import EditProfilePopup from "./EditProfilePopup";
 import EditAvatarPopup from "./EditAvatarPopup";
 import AddPlacePopup from "./AddPlacePopup";
+
 function App() {
   const [currentUser, setCurrentUser] = React.useState({});
   const [isEditAvatarPopupOpen, setEditAvatarPopupOpen] = React.useState(false);
@@ -19,19 +20,24 @@ function App() {
   const [selectedCard, stretchSelectedCard] = React.useState({});
   const [isImagePopupOpen, setImagePopupOpen] = React.useState(false);
   const [cardsData, setCardsData] = React.useState([]);
+
   function handleEditAvatarClick() {
     setEditAvatarPopupOpen(true);
   }
+
   function handleEditProfileClick() {
     setEditProfilePopupOpen(true);
   }
+
   function handleAddPlaceClick() {
     setAddPlacePopupOpen(true);
   }
+
   function handleCardClick(elem) {
     setImagePopupOpen(true);
     stretchSelectedCard(elem);
   }
+
   function closeAllPopups() {
     setEditAvatarPopupOpen(false);
     setEditProfilePopupOpen(false);
@@ -39,6 +45,7 @@ function App() {
     setImagePopupOpen(false);
     stretchSelectedCard({});
   }
+
   function handleUpdateUser(userData) {
     api
       .editProfileData(userData.name, userData.about)
@@ -50,6 +57,7 @@ function App() {
         console.log(err);
       });
   }
+
   function handleUpdateAvatar(avatarData) {
     api
       .editProfileAvatar(avatarData.avatar)
@@ -61,21 +69,34 @@ function App() {
         console.log(err);
       });
   }
+
   function handleCardLike(card) {
     // Снова проверяем, есть ли уже лайк на этой карточке
     const isLiked = card.likes.some((i) => i._id === currentUser._id);
     // Отправляем запрос в API и получаем обновлённые данные карточки
-    api.changeLikeCardStatus(card, !isLiked).then((newCard) => {
-      setCardsData((state) =>
-        state.map((c) => (c._id === card._id ? newCard : c))
-      );
-    });
+    api
+      .changeLikeCardStatus(card, !isLiked)
+      .then((newCard) => {
+        setCardsData((state) =>
+          state.map((c) => (c._id === card._id ? newCard : c))
+        );
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }
+
   function handleCardDelete(card) {
-    api.removeCard(card).then(() => {
-      setCardsData((state) => state.filter((c) => c._id !== card._id));
-    });
+    api
+      .removeCard(card)
+      .then(() => {
+        setCardsData((state) => state.filter((c) => c._id !== card._id));
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }
+
   function handleAddPlaceSubmit(card) {
     api
       .addCard(card)
@@ -87,6 +108,7 @@ function App() {
         console.log(err);
       });
   }
+
   React.useEffect(() => {
     api
       .getUserInfo()
@@ -98,6 +120,7 @@ function App() {
       });
   }, []);
   // пустой массив зависимостей нужен, чтобы цикл закончился строго на монтировании элемента;
+
   React.useEffect(() => {
     api
       .getCards()
@@ -108,6 +131,7 @@ function App() {
         console.log(err);
       });
   }, []);
+
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <div className="page">
